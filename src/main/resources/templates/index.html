@@ -8,22 +8,19 @@
     <!-- start inside staic folder-->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" type="text/css" rel="stylesheet"/>
     <link th:href="@{/bootstrap/js/bootstrap.min.css}" type="text/html" rel="stylesheet"/>
-<!--    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>-->
-<!--    <link href="../static/bootstrap/js/bootstrap.min.css" rel="stylesheet"/>-->
     <title>Document</title>
 </head>
 <body>
 
-
 <div class="container" >
     <div class="card m-4" style="margin: 0 auto">
-        <div class="card-header text-center">
+        <!--<div class="card-header text-center">
             <h4>Leaning About OAuth 2.1 Login with Spring Security</h4>
-        </div>
+        </div>-->
         <div class="card-body">
-            <h4 class="card-title">
+            <h4 class="card-title text-center">
                 You are successfully logged in <span class="text-danger" th:text="${userName}"></span>
-                via the OAuth 2.0 Client <span class="text-danger" th:text="${clientName}"></span>
+                <!--via the OAuth 2.0 Client <span class="text-danger" th:text="${clientName}"></span>-->
             </h4>
             <div class="container" style="margin: 0 auto; max-width: 820px;">
                 <ul class="list-group mt-4">
@@ -44,12 +41,6 @@
                 </ul>
             </div>
 
-            <div th:fragment="logout" sec:authorize="isAuthenticated()">
-                <form class="container" style="margin: 0 auto;max-width: 820px;" action="#"
-                      th:action="@{/logout}" method="post">
-                    <input class="btn btn-primary mt-3" type="submit" value="Logout"/>
-                </form>
-            </div>
 
         </div>
     </div>

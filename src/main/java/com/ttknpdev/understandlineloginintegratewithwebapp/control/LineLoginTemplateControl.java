@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,15 +18,10 @@ import java.util.Map;
 @RequestMapping(value = "/api")
 public class LineLoginTemplateControl {
 
-    private Logback logback;
+    private final Logback logback;
 
     public LineLoginTemplateControl() {
         logback = new Logback(LineLoginTemplateControl.class);
-    }
-
-    @GetMapping("/logout")
-    public String logoutPage(Model model) {
-        return "logout";
     }
 
 
@@ -37,7 +31,7 @@ public class LineLoginTemplateControl {
         return "hello-word";
     }
 
-    @GetMapping("/app")
+    @GetMapping("/app/profile")
     public String indexPage(Model model,
                         @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient,
                         @AuthenticationPrincipal OAuth2User oauth2User) {
@@ -45,7 +39,6 @@ public class LineLoginTemplateControl {
         model.addAttribute("userName", oauth2User.getName());
         model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
         model.addAttribute("userAttributes", oauth2User.getAttributes());
-
         logback.log.warn("*** OAuth2User ****\n" +
                         "oauth2User.getAttributes() : {}\n" +
                         "oauth2User.getName() : {}\n" +
@@ -55,7 +48,6 @@ public class LineLoginTemplateControl {
                 oauth2User.getName(),
                 oauth2User.getAuthorities()
         );
-
         logback.log.warn("*** OAuth2AuthorizedClient ****\n" +
                         "authorizedClient.getAccessToken().getTokenType().getValue() : {}\n" +
                         "authorizedClient.getAccessToken().getScopes() : {}\n" +
@@ -67,12 +59,11 @@ public class LineLoginTemplateControl {
                 authorizedClient.getAccessToken().getTokenValue(),
                 authorizedClient.getClientRegistration().getClientName()
         );
-
         return "index";
     }
 
     @GetMapping("/app/info-oauth")
-    public ResponseEntity infoOauth2(
+    public ResponseEntity<Map<String, Object>> infoOauth2(
             @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient,
             @AuthenticationPrincipal OAuth2User oauth2User,
             Principal user) {

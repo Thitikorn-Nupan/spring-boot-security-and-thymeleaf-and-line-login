@@ -12,12 +12,9 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 @Configuration
 public class LineLoginConfig {
 
-
-    private String clientId;
-
-    private String clientSecret;
-
-    private String pathRedirect;
+    private final String clientId;
+    private final String clientSecret;
+    private final String pathRedirect;
 
     // work for import like key classpath as spring.config.import=classpath:<Path> another case won work
     public LineLoginConfig(@Value("${CLIENT.ID}") String clientId, @Value("${CLIENT.SECRET.ID}") String clientSecret, @Value("${PATH.REDIRECT}") String pathRedirect) {
@@ -31,8 +28,8 @@ public class LineLoginConfig {
         return new InMemoryClientRegistrationRepository(this.lineClientRegistration());
     }
 
-    /*
-        May can use Spring Boot Auto-configuration set all detail on application.yml, application.properties
+    /**
+        You can use Spring Boot Auto-configuration set all detail on application.yml, application.properties
     */
     private ClientRegistration lineClientRegistration() {
         return ClientRegistration.withRegistrationId("line")
